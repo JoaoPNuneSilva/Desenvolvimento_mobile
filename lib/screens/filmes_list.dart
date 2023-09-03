@@ -1,6 +1,6 @@
 // Importando as bibliotecas necessárias
 import 'package:flutter/material.dart';
-import 'package:trabalho_consulta_api/http/filme_api.dart'; // Importando a classe FilmeApi do seu código.
+import '../http/filme_api.dart'; // Importando a classe FilmeApi do seu código.
 import '../model/filme.dart'; // Importando a classe Filme do seu modelo.
 
 // Definindo o widget FilmesList que é um Stateful widget.
@@ -52,22 +52,25 @@ class _FilmesListState extends State<FilmesList> {
                 child: Column(
                   children: [
                     Image.network(
-                      'https://upload.wikimedia.org/wikipedia/pt/0/00/Iron_Man_poster.jpg', // Mostrando a capa do filme.
+                      filme.capa, // Mostrando a capa do filme.
                       height: 120,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
-                    const Text('Aqui vai o título',
-                        style: TextStyle(
-                            fontSize: 18)), // Mostrando o título do filme.
-                    ListTile(
-                      leading:
-                          Text(filme.id.toString()), // Mostrando o ID do filme.
-                      subtitle:
-                          const Text('Aqui vai o Resumo'), // Mostrando o resumo do filme.
-                      trailing: const Text(
-                          ' duração'), // Mostrando a duração do filme.
-                    ),
+                    Text(filme.titulo, style: const TextStyle(fontSize: 18)), // Mostrando o título do filme.
+                   ListTile(
+                    leading: Text(filme.id.toString(), style: const TextStyle(fontSize: 8)),
+                   subtitle: Text(filme.resumo, style: const TextStyle(fontSize: 8)),
+                   trailing: Text(filme.duracao.toString(), style: const TextStyle(fontSize: 8)),
+                   title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(filme.elenco, style: const TextStyle(fontSize: 8)),
+                          SizedBox(height: 8), // Espaço vertical entre os itens
+                        ],
+                      ),
+                    )             
+                   //),
                   ],
                 ),
               );
